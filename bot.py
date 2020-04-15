@@ -1,5 +1,5 @@
 import discord
-from google_search_api import search
+from google_search import search
 from database import post_data, fetch_data, create_search_table
 from secret import TOKEN
 
@@ -40,6 +40,7 @@ class MyClient(discord.Client):
           await message.channel.send(bot_message)
 
 
-client = MyClient() 
+client = MyClient()
+TOKEN = os.environ['TOKEN']
 client.run(TOKEN)
 
