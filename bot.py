@@ -1,7 +1,6 @@
 import discord
 from google_search import search
 from database import post_data, fetch_data, create_search_table
-from secret import TOKEN
 
 class MyClient(discord.Client):
     async def on_ready(self):

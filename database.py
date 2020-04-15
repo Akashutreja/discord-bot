@@ -1,5 +1,4 @@
 import psycopg2
-from secret import db_host,db_port,db_name,db_user,db_password
 from datetime import datetime
 import os
 
