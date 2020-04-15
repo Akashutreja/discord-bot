@@ -14,8 +14,8 @@ class RedisDatabase:
     print("posted data in redis")
 
   def fetch_data(self, query):
-    return json.loads(self.redis_conn.get(query))
     print("fetch from redis done")
+    return json.loads(self.redis_conn.get(query))
 
   def key_exists(self, query):
     return self.redis_conn.exists(query)
