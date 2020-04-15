@@ -1,14 +1,11 @@
 import psycopg2
 from secret import db_host,db_port,db_name,db_user,db_password
 from datetime import datetime
+import os
 
+DATABASE_URL = os.environ['DATABASE_URL']
 def create_connection():
-  connection = psycopg2.connect(host=db_host, 
-    port=db_port, 
-    user=db_user, 
-    password=db_password,
-    database=db_name, 
-    sslmode='require')
+  connection = psycopg2.connect(DATABASE_URL, sslmode='require')
   return connection
 
 def create_search_table():
