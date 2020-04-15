@@ -1,5 +1,5 @@
 import discord
-from google_search import search
+from google_search import search_data
 from database import post_data, fetch_data, create_search_table
 import os
 
@@ -22,7 +22,7 @@ class MyClient(discord.Client):
           user_id = message.author.id
           post_data(user_id, query)
 
-          results = search(query)
+          results = search_data(query)
           if results:
             links = ' \n'.join(results)
             bot_message = 'Hey {}, you searched for {}. The top five results are: \n {}'.format(message.author.mention, query, links)
