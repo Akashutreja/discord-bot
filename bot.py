@@ -13,7 +13,7 @@ class MyClient(discord.Client):
         self.db = Database()
 
     async def on_message(self, message):
-        # don't respond to ourselves
+        # don't respond to itself
         content = message.content
         if message.author == self.user:
             return
