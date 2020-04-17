@@ -22,9 +22,14 @@ class Database:
     user_id: user id who is doing chat
     query:   keyword that user is seraching like !google kewyword 
     """
-    cursor = self.connection.cursor()
-    cursor.execute("Insert into public.search_history Values('{}', '{}','{}')".format(user_id, query, datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
-    self.connection.commit()
+    try:
+      cursor = self.connection.cursor()
+      cursor.execute("Insert into public.search_history Values('{}', '{}','{}')".format(user_id, query, datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+      self.connection.commit()
+    except Exception as e:
+      self.connection.rollback()
+      print("exception")
+      raise e
 
   def fetch_data(self, user_id, query):
     """
@@ -33,7 +38,11 @@ class Database:
     user_id: user id who is requesting search history
     query:   keyword for which user is asking history like !recent keyword
     """
-    cursor = self.connection.cursor()
-    cursor.execute("Select * from public.search_history where user_id = '{}' and search_keyword like '%".format(user_id) + query +"%'")
-    results = cursor.fetchall()
-    return results
+    try:
+      cursor = self.connection.cursor()
+      cursor.execute("Select * from public.search_history where user_id = '{}' and search_keyword like '%".format(user_id) + query +"%'")
+      results = cursor.fetchall()
+      return results
+    except Exception as e:
+      print("exception")
+      self.connection.rollback()
